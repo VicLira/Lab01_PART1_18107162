@@ -7,8 +7,6 @@ def get_conn():
     # ----------------------------------------
     # Abre e retorna uma conexão DuckDB para o stage informado.
     # ----------------------------------------
-    
-
     base_dir = Path("infra") / "repositories"
     base_dir.mkdir(parents=True, exist_ok=True)
 

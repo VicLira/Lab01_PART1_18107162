@@ -44,7 +44,7 @@ def create_schema(conn):
     );
 
     -- ==========================================================
-    -- 🔹 DIM_POSTO (SCD TYPE 2)
+    -- DIM_POSTO (SCD TYPE 2)
     -- ==========================================================
     CREATE TABLE IF NOT EXISTS dim_posto (
         posto_id SERIAL PRIMARY KEY,

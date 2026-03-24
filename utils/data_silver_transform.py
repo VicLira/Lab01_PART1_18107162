@@ -11,7 +11,7 @@ from utils.duck_connections import close_conn, get_conn
 
 
 # ==========================================================
-# 🔹 UNICODE FIX
+# UNICODE FIX
 # ==========================================================
 
 def _fix_unicode_recursive(s: str, max_iter: int = 5) -> str:
@@ -44,7 +44,7 @@ def _fix_unicode_duckdb(s: str) -> str:
 
 
 # ==========================================================
-# 🔹 CONEXÃO E REGISTROS
+# CONEXÃO E REGISTROS
 # ==========================================================
 
 
@@ -67,7 +67,7 @@ def _register_functions(con: duckdb.DuckDBPyConnection) -> None:
 
 
 # ==========================================================
-# 🔹 BRONZE RAW
+# BRONZE RAW
 # ==========================================================
 
 def _create_bronze_raw(con: duckdb.DuckDBPyConnection, path: str) -> None:
@@ -193,7 +193,7 @@ def _generate_plots(con: duckdb.DuckDBPyConnection, silver_root: str, report_pat
     plt.close()
 
     # ==========================================================
-    # 🔹 ADICIONA AO MARKDOWN EXISTENTE
+    # ADICIONA AO MARKDOWN EXISTENTE
     # ==========================================================
 
     with open(report_path, "a", encoding="utf-8") as f:
@@ -218,17 +218,17 @@ def _generate_plots(con: duckdb.DuckDBPyConnection, silver_root: str, report_pat
 
 
 # ==========================================================
-# 🔹 RELATÓRIO
+# RELATÓRIO
 # ==========================================================
 
 def _generate_report(con: duckdb.DuckDBPyConnection, output_path: str) -> None:
     print("\t- GERANDO RELATÓRIO MARKDOWN")
 
-    # 🔹 Garante que o diretório exista
+    # Garante que o diretório exista
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
 
     # ==========================================================
-    # 🔹 MÉTRICAS BÁSICAS
+    # MÉTRICAS BÁSICAS
     # ==========================================================
 
     total_rows = con.execute(
@@ -255,7 +255,7 @@ def _generate_report(con: duckdb.DuckDBPyConnection, output_path: str) -> None:
     ).fetchdf()
 
     # ==========================================================
-    # 🔹 NULOS
+    # NULOS
     # ==========================================================
 
     nulls = con.execute("""
@@ -268,7 +268,7 @@ def _generate_report(con: duckdb.DuckDBPyConnection, output_path: str) -> None:
     """).fetchdf()
 
     # ==========================================================
-    # 🔹 GERA MARKDOWN
+    # GERA MARKDOWN
     # ==========================================================
 
     with open(output_path, "w", encoding="utf-8") as f:
@@ -296,7 +296,7 @@ def _generate_report(con: duckdb.DuckDBPyConnection, output_path: str) -> None:
 
 
 # ==========================================================
-# 🔹 LIMPEZA E SILVER
+#  LIMPEZA E SILVER
 # ==========================================================
 
 def _create_silver(con: duckdb.DuckDBPyConnection) -> None:
@@ -377,7 +377,7 @@ def _create_silver(con: duckdb.DuckDBPyConnection) -> None:
 
 
 # ==========================================================
-# 🔹 PERSISTÊNCIA
+# PERSISTÊNCIA
 # ==========================================================
 
 def _persist_silver(con: duckdb.DuckDBPyConnection, silver_root: str) -> None:
@@ -393,7 +393,7 @@ def _persist_silver(con: duckdb.DuckDBPyConnection, silver_root: str) -> None:
 
 
 # ==========================================================
-# 🔹 FUNÇÃO PRINCIPAL
+# FUNÇÃO PRINCIPAL
 # ==========================================================
 
 def transform() -> None:

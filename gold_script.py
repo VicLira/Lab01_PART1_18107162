@@ -17,15 +17,15 @@ def handler():
     print("INICIANDO PROCESSO GOLD (DW)")
     start = time.perf_counter()
 
-    # 🔹 Criar Schema
+    # Criar Schema
     conn = get_pg_conn()
     create_schema(conn)
     conn.close()
 
-    # 🔹 Carga
+    # Carga
     load_gold()
 
-    # 🔹 Métricas
+    # Métricas
     run_all_metrics()
 
     end = time.perf_counter()

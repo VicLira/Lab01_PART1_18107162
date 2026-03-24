@@ -100,7 +100,7 @@ def _extract_zip(path: str, target: str) -> List[str]:
                 for name in zip_ref.namelist()
             ]
 
-        # 🔥 opcional: remove zip após extrair
+        # remove zip após extrair
         os.remove(path)
 
     except Exception as e:
@@ -198,13 +198,13 @@ def load(urls: List[str]) -> List[str]:
     futures = []
 
     try:
-        # 🔹 Submete tarefas
+        # Submete tarefas
         for i, url in enumerate(urls, 1):
             futures.append(
                 executor.submit(_download_file, url, target, i, total)
             )
 
-        # 🔹 Coleta resultados
+        # Coleta resultados
         for future in as_completed(futures):
             result = future.result()
 
@@ -214,7 +214,7 @@ def load(urls: List[str]) -> List[str]:
     except KeyboardInterrupt:
         print("\n\t⛔ Interrompido pelo usuário. Cancelando downloads...")
 
-        # 🔥 Cancela tudo que ainda não começou
+        # Cancela tudo que ainda não começou
         for future in futures:
             future.cancel()
 

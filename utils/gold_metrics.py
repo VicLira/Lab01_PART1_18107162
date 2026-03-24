@@ -1,10 +1,9 @@
 import os
 import psycopg2
-from dotenv import load_dotenv
 
 
 # ==========================================================
-# 🔹 CONEXÃO
+# CONEXÃO
 # ==========================================================
 
 def get_conn():
@@ -32,7 +31,7 @@ def execute_query(title, query):
 
 
 # ==========================================================
-# 🔹 MÉTRICAS DE NEGÓCIO
+# MÉTRICAS DE NEGÓCIO
 # ==========================================================
 
 def metric_1_estado_maior_preco_medio():
@@ -124,7 +123,7 @@ def metric_6_margem_media_por_produto():
 
 
 # ==========================================================
-# 🔹 EXECUTAR TODAS
+# EXECUTAR TODAS
 # ==========================================================
 
 def run_all_metrics():

@@ -1,6 +1,6 @@
-from dotenv import load_dotenv
-import duckdb
 import os 
+import duckdb
+from dotenv import load_dotenv
 
 load_dotenv()
 BRONZE_DATA_PATH = os.getenv('BRONZE_DATA_PATH')
@@ -61,8 +61,6 @@ def execute_analysis(entity: str):
         Duplicatas: {duplicates}
         Tipos de dados: {dtypes}
     """)
-
-
 
 if __name__ == '__main__':
     verify()

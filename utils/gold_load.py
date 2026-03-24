@@ -1,6 +1,4 @@
 import os
-import duckdb
-import pandas as pd
 import psycopg2
 from io import StringIO
 from dotenv import load_dotenv
@@ -9,7 +7,7 @@ from utils.duck_connections import close_conn, get_conn
 
 
 # ==========================================================
-# 🔹 CONEXÕES
+# CONEXÕES
 # ==========================================================
 
 def get_pg_conn():
@@ -24,7 +22,7 @@ def get_pg_conn():
 
 
 # ==========================================================
-# 🔹 COPY OTIMIZADO
+# COPY OTIMIZADO
 # ==========================================================
 
 def copy_dataframe(conn, df, table):
@@ -42,7 +40,7 @@ def copy_dataframe(conn, df, table):
 
 
 # ==========================================================
-# 🔹 LOAD GOLD
+# LOAD GOLD
 # ==========================================================
 
 def load_gold():
@@ -53,7 +51,7 @@ def load_gold():
     duck, db_path = get_conn()
     pg = get_pg_conn()
 
-    # 🔹 LIMPA GOLD (FULL LOAD)
+    # LIMPA GOLD (FULL LOAD)
     print("\t- LIMPANDO TABELAS GOLD")
 
     cursor = pg.cursor()
@@ -68,7 +66,7 @@ def load_gold():
     pg.commit()
     cursor.close()
     
-    # 🔹 Lê todos Parquets
+    # Lê todos Parquets
     df = duck.execute(f"""
         SELECT *
         FROM read_parquet('{silver_path}')
@@ -77,7 +75,7 @@ def load_gold():
     print(f"\t- TOTAL REGISTROS SILVER: {len(df)}")
 
     # =============================
-    # 🔹 DIM_DATA
+    # DIM_DATA
     # =============================
     dim_data = df[['data_coleta','ano','mes']].drop_duplicates()
     dim_data['trimestre'] = ((dim_data['mes'] - 1) // 3) + 1
@@ -85,19 +83,19 @@ def load_gold():
     copy_dataframe(pg, dim_data, "dim_data(data,ano,mes,trimestre)")
 
     # =============================
-    # 🔹 DIM_PRODUTO
+    # DIM_PRODUTO
     # =============================
     dim_produto = df[['produto','unidade_medida']].drop_duplicates()
     copy_dataframe(pg, dim_produto, "dim_produto(produto,unidade_medida)")
 
     # =============================
-    # 🔹 DIM_LOCALIDADE
+    # DIM_LOCALIDADE
     # =============================
     dim_localidade = df[['regiao_sigla','estado_sigla','municipio']].drop_duplicates()
     copy_dataframe(pg, dim_localidade, "dim_localidade(regiao_sigla,estado_sigla,municipio)")
 
     # =============================
-    # 🔹 DIM_POSTO
+    # DIM_POSTO
     # =============================
     dim_posto = df[[
         'revenda','cnpj_revenda','bandeira',
@@ -111,7 +109,7 @@ def load_gold():
     print("\t- DIMENSÕES CARREGADAS")
 
     # =============================
-    # 🔹 FATO
+    # FATO
     # =============================
     print("\t- CRIANDO STAGING NO POSTGRES")
 
