@@ -1,0 +1,6 @@
+duckdb
+postgres
+tabulate
+kagglehub
+matplotlib
+python-dotenv
