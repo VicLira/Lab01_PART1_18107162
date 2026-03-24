@@ -7,14 +7,20 @@ from utils.data_silver_transform import transform
 def handler():
     # ----------------------------------------
     # Handler que:
-    # 1. 
+    # 1. Lê dados da camada BRONZE
+    # 2. Aplica transformações e limpeza
+    # 3. Carrega dados na camada SILVER
+    # 4. Reporta data_quality (ex: nulos, duplicidade, quantidade registros)
+    # 5. Cria gráficos exploratórios
+    # 6. Reporta tempo de execução
     # ----------------------------------------
-    
+
     print("INICIANDO TRANSFORMAÇÃO BRONZE -> SILVER: ")
     start = time.perf_counter()
-    
+
+    # Executa transformações
     transform()
-    
+
     end = time.perf_counter()
     elapsed = end - start
 
